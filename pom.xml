@@ -43,6 +43,10 @@
 			<artifactId>jcodec</artifactId>
 			<version>0.2.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

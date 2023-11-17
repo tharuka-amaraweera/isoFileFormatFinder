@@ -11,6 +11,30 @@ public class Mp4Box {
     private String type;
     private List<Mp4Box> subBoxes;
 
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<Mp4Box> getSubBoxes() {
+        return subBoxes;
+    }
+
+    public void setSubBoxes(List<Mp4Box> subBoxes) {
+        this.subBoxes = subBoxes;
+    }
+
     /**
      * Instantiates a new Mp 4 box.
      *
