@@ -1,5 +1,6 @@
 package castlab.assignment.isoFileFormat.controller;
 
+import castlab.assignment.isoFileFormat.dto.Mp4Box;
 import castlab.assignment.isoFileFormat.service.Mp4Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class Mp4Controller {
     Mp4Service mp4Service;
 
     @GetMapping("/analyze")
-    public String analyzeMp4File(@RequestParam String url){
+    public Mp4Box analyzeMp4File(@RequestParam String url){
         return mp4Service.analyzeMp4(url);
     }
 }

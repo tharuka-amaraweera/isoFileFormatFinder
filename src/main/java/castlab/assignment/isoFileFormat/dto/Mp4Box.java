@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mp4Box {
-    private int size;
+    private long size;
     private String type;
     private List<Mp4Box> subBoxes;
 
-    public Mp4Box(int size, String type) {
+    public Mp4Box(long size, String type) {
         this.size = size;
         this.type = type;
         this.subBoxes = new ArrayList<>();
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
