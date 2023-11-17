@@ -10,8 +10,17 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The type Mp 4 service.
+ */
 @Service
 public class Mp4Service {
+    /**
+     * Analyze mp 4 mp 4 box.
+     *
+     * @param url the url
+     * @return the mp 4 box
+     */
     public Mp4Box analyzeMp4(String url) {
         Mp4Box initialBox = null;
         try (InputStream inputStream = new URL(url).openStream()) {
@@ -23,12 +32,19 @@ public class Mp4Service {
         return initialBox;
     }
 
+    /**
+     * Convert to box mp 4 box.
+     *
+     * @param fileBytes the file bytes
+     * @param offset    the offset
+     * @return the mp 4 box
+     */
     private Mp4Box convertToBox(byte[] fileBytes, int offset) {
         if (offset < 0 || offset + 8 > fileBytes.length) {
             throw new IllegalArgumentException("Invalid offset or length for converting to Mp4Box.");
         }
 
-        long boxSize = readInt(fileBytes, offset);
+        long boxSize = read(fileBytes, offset);
         String boxType = new String(fileBytes, offset + 4, 4, StandardCharsets.US_ASCII);
 
         System.out.println("Offset: " + offset + ", BoxSize: " + boxSize + ", BoxType: " + boxType);
@@ -41,7 +57,7 @@ public class Mp4Service {
 
             // Iterate through sub-boxes
             while (subBoxOffset < offset + boxSize && subBoxOffset + 8 < fileBytes.length && subBoxOffset > 0) {
-                long subBoxSize = readInt(fileBytes, subBoxOffset);
+                long subBoxSize = read(fileBytes, subBoxOffset);
                 Mp4Box subBox = convertToBox(fileBytes, subBoxOffset);
                 mp4Box.addSubBox(subBox);
 
@@ -53,7 +69,14 @@ public class Mp4Service {
         return mp4Box;
     }
 
-    private long readInt(byte[] bytes, int offset) {
+    /**
+     * Read long.
+     *
+     * @param bytes  the bytes
+     * @param offset the offset
+     * @return the long
+     */
+    private long read(byte[] bytes, int offset) {
         if (bytes == null || offset < 0 || offset + 4 > bytes.length) {
             return 0;
         }
